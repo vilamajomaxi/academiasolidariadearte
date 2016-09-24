@@ -23,9 +23,14 @@ class Alumno(models.Model):
     telefonoFijo = models.CharField(max_length=80,null=True,blank=True);
     email = models.CharField(max_length=80,blank=True,null=True);
 
+    def __str__(self):
+        return str(self.nombre) + " "+str(self.apellido)
+
 class Clase(models.Model):
     descripcion = models.CharField(max_length=100)
     sede = models.CharField(max_length=100)
+    def __str__(self):
+        return str(self.descripcion) + "-"+str(self.sede)
 
 class Asistencia(models.Model):
     fecha_hora = models.DateTimeField(auto_now=True)
