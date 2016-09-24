@@ -37,9 +37,15 @@ def dash(request):
 @login_required
 def reporte(request):
     alumnos = Alumno.objects.all()
+    clase=0
+    devolucion=0
+    consolidacion=0
     for alumno in alumnos:
         asistencias = Asistencia.objects.filter(alumno=alumno)
-        alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
         alumno.clase =  asistencias.filter(clase__tipo='R').count()
+        clase+=alumno.clase
+        alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
+        consolidacion+=alumno.consolidacion
         alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
-    return render(request,'dash.html',{'alumnos':alumnos})
+        devolucion+=alumno.consolidacion
+    return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
