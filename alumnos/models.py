@@ -13,17 +13,15 @@ class Alumno(models.Model):
         ("MU", _('Muller')),
     )
     sede = models.CharField(choices=sede_choices, max_length=2, default="VA");
-    nombre = models.CharField(max_length=80,null=True);
-    dni = models.CharField(max_length=80,blank=True);
-    apellido = models.CharField(max_length=80, null=True);
-    direccion = models.CharField(max_length=80,null=True);
-    barrio = models.CharField(max_length=80,null=True);
-    ciudad = models.CharField(max_length=80,null=True);
-    fecha_nacimiento = models.DateField(max_length=80,null=True);
-    telefono = models.IntegerField(null=True);
-    telefonoFijo = models.IntegerField(null=True);
-    email = models.CharField(max_length=80 ,null=True);
-
+    nombre = models.CharField(max_length=80);
+    apellido = models.CharField(max_length=80);
+    direccion = models.CharField(max_length=80);
+    barrio = models.CharField(max_length=80);
+    ciudad = models.CharField(max_length=80);
+    fecha_nacimiento = models.DateField(max_length=80);
+    telefono = models.CharField(max_length=80,blank=True,null=True);
+    telefonoFijo = models.CharField(max_length=80,null=True,blank=True);
+    email = models.CharField(max_length=80,blank=True,null=True);
 
 class Clase(models.Model):
     descripcion = models.CharField(max_length=100)
