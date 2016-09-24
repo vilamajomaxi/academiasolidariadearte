@@ -1,3 +1,25 @@
+import string
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext as _
 
-# Create your models here.
+class Alumno(models):
+    sede_choices = (
+        ("VA", _('Villa Allende')),
+        ("RO", _('Rosario')),
+        ("HU", _('Hurlingham')),
+        ("CR", _('Campo de la rivera')),
+        ("VL", _('Villa Libertador')),
+        ("MU", _('Muller')),
+    )
+    sede = models.CharField(choices=sede_choices, max_length=2, default="VA");
+    nombre = models.CharField(max_length=80);
+    apellido = models.CharField(max_length=80);
+    direccion = models.CharField(max_length=80);
+    barrio = models.CharField(max_length=80);
+    ciudad = models.CharField(max_length=80);
+    fecha_nacimiento = models.DateField(max_length=80);
+    telefono = models.IntegerField(null=True);
+    telefonoFijo = models.IntegerField(null=True);
+
+    email = models.CharField(null=True);
