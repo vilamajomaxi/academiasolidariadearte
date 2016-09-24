@@ -21,7 +21,7 @@ from alumnos.views import *
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^dash/',reporte),
-    url(r'^$', admin.site.urls),
+    url(r'^dash/',filter),
+    url(r'^$', filter),
 
 ]

@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
-from alumnos.forms import LoginForm, AlumnoForm
+from alumnos.forms import LoginForm, AlumnoForm,Filterform
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,7 @@ import datetime
 from alumnos.models import Alumno,Asistencia,Clase
 from django.utils import timezone
 from django.shortcuts import render, redirect
+
 
 def login(request):
     if request.method == 'POST':
@@ -41,7 +42,7 @@ def reporte(request):
     devolucion=0
     consolidacion=0
     for alumno in alumnos:
-        asistencias = Asistencia.objects.filter(alumno=alumno)
+        asistencias = Asistencia.objects.filter(alumno = alumno)
         alumno.clase =  asistencias.filter(clase__tipo='R').count()
         clase+=alumno.clase
         alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
@@ -49,3 +50,33 @@ def reporte(request):
         alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
         devolucion+=alumno.consolidacion
     return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
+
+
+
+def filter(request):
+    clase=0
+    devolucion=0
+    consolidacion=0
+    if request.method == 'POST':
+        form = Filterform(request.POST)
+        if form.is_valid():
+            mes = form.cleaned_data['mes']
+            sede = form.cleaned_data['sede']
+            alumnos = Alumno.objects.all()
+            if sede:
+                alumnos = alumnos.filter(sede = sede)
+            for alumno in alumnos:
+                if mes:
+                    asistencias = Asistencia.objects.filter(alumno=alumno,fecha_hora__month=int(mes) + 1)
+                else:
+                    asistencias = Asistencia.objects.filter(alumno=alumno)
+                alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
+                consolidacion+=alumno.consolidacion
+                alumno.clase = asistencias.filter(clase__tipo='R').count()
+                clase+=alumno.clase
+                alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
+                devolucion+=alumno.consolidacion
+            return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
+    else:
+        form = Filterform()
+    return render(request,'filter.html',{'form':form})
