@@ -3,15 +3,16 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
+sede_choices = (
+    ("VA", _('Villa Allende')),
+    ("RO", _('Rosario')),
+    ("HU", _('Hurlingham')),
+    ("CR", _('Campo de la rivera')),
+    ("VL", _('Villa Libertador')),
+    ("MU", _('Muller')),
+)
+
 class Alumno(models.Model):
-    sede_choices = (
-        ("VA", _('Villa Allende')),
-        ("RO", _('Rosario')),
-        ("HU", _('Hurlingham')),
-        ("CR", _('Campo de la rivera')),
-        ("VL", _('Villa Libertador')),
-        ("MU", _('Muller')),
-    )
     sede = models.CharField(choices=sede_choices, max_length=2, default="VA");
     nombre = models.CharField(max_length=80);
     apellido = models.CharField(max_length=80);
@@ -28,7 +29,15 @@ class Alumno(models.Model):
 
 class Clase(models.Model):
     descripcion = models.CharField(max_length=100)
-    sede = models.CharField(max_length=100)
+    sede = models.CharField(choices=sede_choices, max_length=2, default="VA");
+    tipo_choices = (
+                ("DS", _('Devolucion solidaria')),
+                ("CV", _('Consolidacion de valores')),
+                ("R", _('Clase regular')),
+    )
+
+    tipo =  models.CharField(choices=tipo_choices, max_length=2, default="DS");
+
     def __str__(self):
         return str(self.descripcion) + "-"+str(self.sede)
 
