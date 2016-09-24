@@ -19,6 +19,7 @@ from django.contrib import admin
 from alumnos.views import *
 
 urlpatterns = [
+    url(r'^agregar_alumno/', agregar_alumno),
     url(r'^admin/', admin.site.urls),
     url(r'^dash/',dash),
     url(r'^$', login, name='index'),

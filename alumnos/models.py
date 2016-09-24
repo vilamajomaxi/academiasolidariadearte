@@ -22,3 +22,6 @@ class Alumno(models.Model):
     telefono = models.CharField(max_length=80,blank=True,null=True);
     telefonoFijo = models.CharField(max_length=80,null=True,blank=True);
     email = models.CharField(max_length=80,blank=True,null=True);
+
+
+
