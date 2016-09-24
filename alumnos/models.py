@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
-class Alumno(models):
+class Alumno(models.Model):
     sede_choices = (
         ("VA", _('Villa Allende')),
         ("RO", _('Rosario')),
@@ -19,7 +19,6 @@ class Alumno(models):
     barrio = models.CharField(max_length=80);
     ciudad = models.CharField(max_length=80);
     fecha_nacimiento = models.DateField(max_length=80);
-    telefono = models.IntegerField(null=True);
-    telefonoFijo = models.IntegerField(null=True);
-
-    email = models.CharField(null=True);
+    telefono = models.CharField(max_length=80,blank=True,null=True);
+    telefonoFijo = models.CharField(max_length=80,null=True,blank=True);
+    email = models.CharField(max_length=80,blank=True,null=True);
