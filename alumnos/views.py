@@ -9,6 +9,11 @@ from django.shortcuts import render
 from alumnos.forms import LoginForm, AlumnoForm
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+import datetime
+from alumnos.models import Alumno,Asistencia,Clase
+from django.utils import timezone
+from django.shortcuts import render, redirect
 
 
 
@@ -30,9 +35,6 @@ def login(request):
 
 
 
-def dash(request):
-    pass
-
 
 @login_required
 def agregar_alumno(request):
@@ -50,3 +52,14 @@ def agregar_alumno(request):
     else:
         form = AlumnoForm()
     return render(request, 'agregar_alumno.html', {'form': form})
+
+
+@login_required
+def reporte(request):
+    alumnos = Alumno.objects.all()
+    for alumno in alumnos:
+        asistencias = Asistencia.objects.filter(alumno = alumno).()
+        alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
+        alumno.clase =  asistencias.filter(clase__tipo='R').count()
+        alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
+    return render(request,'dash.html',{'alumnos':alumnos})

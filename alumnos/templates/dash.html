@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container">  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Clases regulares</th>
+        <th>Consolidaciones de valores</th>
+          <th>Devolucion solidaria</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+{% for alumno in alumnos %}
+
+      <tr>
+        <td>{{alumno}}</td>
+        <td>{{ alumno.clase}}</td>
+        <td>{{ alumno.consolidacion}}</td>
+        <td>{{ alumno.devolucion}}</td>
+      </tr>
+
+{% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock content %}
 

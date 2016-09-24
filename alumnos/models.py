@@ -45,6 +45,6 @@ class Clase(models.Model):
         return str(self.descripcion) + "-"+str(self.sede)
 
 class Asistencia(models.Model):
-    fecha_hora = models.DateTimeField(auto_now=True)
+    fecha_hora = models.DateField()
     alumno = models.ForeignKey(Alumno)
     clase = models.ForeignKey(Clase)
