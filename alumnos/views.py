@@ -84,7 +84,9 @@ def filter(request):
                 if (alumno.devolucion != 0):
                     perdevolucion += 1
                 if (alumno.clase != 0):
-                    pertotal += 1                 
+                    pertotal += 1
+                if pertotal == 0:
+                    pertotal = 1            
             return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion, 'perconsolidacion':float(float(perconsolidacion) /float(pertotal))*100, 'perdevolucion':float(float(perdevolucion) /float(pertotal))*100})
     else:
         form = Filterform()
