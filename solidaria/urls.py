@@ -21,7 +21,11 @@ from alumnos.views import *
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^dash/',filter),
+    url(r'^gestionar_clases/', clases),
+    url(r'^agregar/', agregar_alumno),
+    url(r'editar/(\d+)/$', editar_alumno, name="editer_publicacion"),
+
+    url(r'^administrar/', administrar),
     url(r'^$', filter),
 
 ]

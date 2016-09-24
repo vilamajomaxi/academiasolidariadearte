@@ -40,9 +40,10 @@
 
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
-                    <li><a href="/agregar/"><strong>Filter</strong></a></li>
-                    <li><a href="/"><strong>Administracion</strong></a></li>
-                    <li><a href="/dash/"><strong>Filtrar</strong></a></li>
+                    <li><a href="/administrar/"><strong>Administrar Alumnos</strong></a></li>
+                    <li><a href="/"><strong>Filtrar</strong></a></li>
+                    <li><a href="/gestionar_clases"><strong>Gestionar clases</strong></a></li>
+
 
                 {% endif %}
             </ul>
@@ -62,7 +63,7 @@
     </div>
     </div>
     <div class="row">
-    <div class="contenido" style="margin-top:100px">
+    <div class="contenido" style="margin-top:100px;margin-bottom: 100px">
         {% block content %}
 
         {% endblock content %}
@@ -88,8 +89,7 @@
             </div>
         </nav>
     </div>
-</
->
+</div>
 
 </body>
 </html>

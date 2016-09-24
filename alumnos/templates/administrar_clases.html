@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+        <div class="col-sm-2"></div>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-2">    <a href="/agregar/"><button type="button" class="btn btn-success"
+                                                              >
+                        Agregar nueva Clase
+                    </button>
+
+    </a></div>
+
+
+
+
+    </div>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+
+        <table class="table table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th style="">Clases</th>
+                <th> Descripcion</th>
+                <th style="text-align: center;">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for dato in datos %}
+            <tr>
+                <td><h4>{{ dato }}</h4></td>
+                <td>{{ dato.descripcion }}</td>
+
+                <td style="text-align: center;">
+                    <a href="/editar/{{ dato.id }}"><button type="button"  class="btn btn-default">
+                        Editar
+                    </button></a>
+                    <a href="/borrar/{{ dato.id }}"><button type="button" class="btn btn-danger"
+                                                              onclick="return confirm('¿Está seguro que desea borrar la entrada?')">
+                        Borrar
+                    </button>
+                </td>
+            </tr>
+                    {% endfor %}
+
+
+    </div>
+    </tbody>
+    </table>
+        <div class="col-sm-2"></div>
+
+</div>
+
+{% endblock content %}

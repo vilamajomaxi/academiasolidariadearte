@@ -80,3 +80,33 @@ def filter(request):
     else:
         form = Filterform()
     return render(request,'filter.html',{'form':form})
+
+
+def administrar(request):
+    datos = Alumno.objects.all()
+    return render(request,'administrar.html',{'datos':datos})
+
+def clases(request):
+    datos = Clase.objects.all()
+    return render(request,'administrar_clases.html',{'datos':datos})
+
+
+@login_required
+def agregar_alumno(request):
+    if request.method == 'POST':
+        form = AlumnoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/dash/')
+        else:
+            render(request, 'agregar_alumno.html', {'form': form})
+    else:
+        form = AlumnoForm()
+    return render(request, 'agregar_alumno.html', {'form': form})
+
+
+
+def editar_alumno(request,id):
+    alumno = Alumno.objects.get(id = id)
+    asistencias = Asistencia.objects.filter(alumno = alumno)
+    return render(request,'editar_alumno.html',{'alumno':alumno,'asistencias':asistencias})
