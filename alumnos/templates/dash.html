@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">  <table class="table table-striped">
+<div class="container">
+<div class="col-lg-10">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Alumno</th>
@@ -15,16 +17,44 @@
 
 {% for alumno in alumnos %}
 
+{% if alumno.consolidacion == 0 %}
+      <tr class="warning">
+{% else %}
       <tr>
+{% endif %}
         <td>{{alumno}}</td>
         <td>{{ alumno.clase}}</td>
         <td>{{ alumno.consolidacion}}</td>
         <td>{{ alumno.devolucion}}</td>
       </tr>
-
 {% endfor %}
+      <tr style="border-top:solid">
+      <td><b>TOTAL</b></td>
+      <td><b>{{clase}}</b></td>
+      <td><b>{{consolidacion}}</b></td>
+      <td><b>{{devolucion}}</b></td>
+      </tr>
     </tbody>
   </table>
+</div>
+<div class="col-lg-2">
+  <div class="panel panel-default">
+  <div class="panel-heading">Desercion en Consolidaciones</div>
+  <div class="panel-body">
+    0%
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Desercion en Devolucion
+  </div>
+  <div class="panel-body">
+    0%
+  </div>
+</div>
+
+</div>
 </div>
 
 {% endblock content %}

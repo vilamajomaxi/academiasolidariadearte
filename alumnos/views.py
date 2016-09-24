@@ -38,15 +38,25 @@ def dash(request):
 @login_required
 def reporte(request):
     alumnos = Alumno.objects.all()
+    clase=0
+    devolucion=0
+    consolidacion=0
     for alumno in alumnos:
         asistencias = Asistencia.objects.filter(alumno = alumno)
-        asistencias = Asistencia.objects.filter(alumno=alumno)
-
-    return render(request,'dash.html',{'alumnos':alumnos})
+        alumno.clase =  asistencias.filter(clase__tipo='R').count()
+        clase+=alumno.clase
+        alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
+        consolidacion+=alumno.consolidacion
+        alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
+        devolucion+=alumno.consolidacion
+    return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
 
 
 
 def filter(request):
+    clase=0
+    devolucion=0
+    consolidacion=0
     if request.method == 'POST':
         form = Filterform(request.POST)
         if form.is_valid():
@@ -61,9 +71,12 @@ def filter(request):
                 else:
                     asistencias = Asistencia.objects.filter(alumno=alumno)
                 alumno.consolidacion = asistencias.filter(clase__tipo='CV').count()
+                consolidacion+=alumno.consolidacion
                 alumno.clase = asistencias.filter(clase__tipo='R').count()
+                clase+=alumno.clase
                 alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
-            return render(request, 'dash.html', {'alumnos': alumnos})
+                devolucion+=alumno.consolidacion
+            return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
     else:
         form = Filterform()
     return render(request,'filter.html',{'form':form})

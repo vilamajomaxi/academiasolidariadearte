@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^dash/',filter),
-    url(r'^$', admin.site.urls),
+    url(r'^$', filter),
 
 ]
