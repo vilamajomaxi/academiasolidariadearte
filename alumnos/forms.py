@@ -37,13 +37,13 @@ date_choices = (
             ('11',	"diciembre"),
 )
 
-def Filter_form(forms.Form):
-    mes = forms.ChoiceField(label = "Mes",choice = date_choices,required=False)
-    sede = form.ChoiceField(label = "Sede",choices= sede_choices ,required=False)
+class Filterform(forms.Form):
+    mes = forms.ChoiceField(label = "Mes",choices = date_choices,required=False)
+    sede = forms.ChoiceField(label = "Sede",choices= sede_choices ,required=False)
 
 
     def __init__(self, *args, **kwargs):
-        super(AlumnoForm, self).__init__(*args, **kwargs)
+        super(Filterform, self).__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'})

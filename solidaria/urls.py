@@ -20,9 +20,8 @@ from alumnos.views import *
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^agregar_alumno/', agregar_alumno),
     url(r'^admin/', admin.site.urls),
-    url(r'^dash/',reporte),
-    url(r'^$', login, name='index'),
+    url(r'^dash/',filter),
+    url(r'^$', admin.site.urls),
 
 ]

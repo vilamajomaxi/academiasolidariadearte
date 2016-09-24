@@ -42,9 +42,12 @@ class Clase(models.Model):
     tipo =  models.CharField(choices=tipo_choices, max_length=2, default="DS")
 
     def __str__(self):
-        return str(self.descripcion) + "-"+str(self.sede)
+        return str(self.titulo) + "-" + str(self.sede)
 
 class Asistencia(models.Model):
     fecha_hora = models.DateField()
     alumno = models.ForeignKey(Alumno)
     clase = models.ForeignKey(Clase)
+
+    def __str__(self):
+        return str(self.fecha_hora) + "-"+str(self.alumno)
