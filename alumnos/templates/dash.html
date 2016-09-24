@@ -17,7 +17,8 @@
 
 {% for alumno in alumnos %}
 
-{% if alumno.consolidacion == 0 %}
+{% if alumno.clase != 0 %}
+{% if alumno.consolidacion != 0 %}
       <tr class="warning">
 {% else %}
       <tr>
@@ -27,6 +28,7 @@
         <td>{{ alumno.consolidacion}}</td>
         <td>{{ alumno.devolucion}}</td>
       </tr>
+{% endif %}
 {% endfor %}
       <tr style="border-top:solid">
       <td><b>TOTAL</b></td>
@@ -41,7 +43,7 @@
   <div class="panel panel-default">
   <div class="panel-heading">Desercion en Consolidaciones</div>
   <div class="panel-body">
-    0%
+    {{perconsolidacion}}%
   </div>
 </div>
 
@@ -50,7 +52,7 @@
     Desercion en Devolucion
   </div>
   <div class="panel-body">
-    0%
+    {{perdevolucion}}%
   </div>
 </div>
 

@@ -54,6 +54,9 @@ def reporte(request):
 
 
 def filter(request):
+    perdevolucion=0
+    perconsolidacion=0
+    pertotal=0
     clase=0
     devolucion=0
     consolidacion=0
@@ -75,8 +78,16 @@ def filter(request):
                 alumno.clase = asistencias.filter(clase__tipo='R').count()
                 clase+=alumno.clase
                 alumno.devolucion = asistencias.filter(clase__tipo='DS').count()
-                devolucion+=alumno.consolidacion
-            return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion})
+                devolucion+=alumno.devolucion
+                if (alumno.consolidacion != 0):
+                    perconsolidacion += 1
+                if (alumno.devolucion != 0):
+                    perdevolucion += 1
+                if (alumno.clase != 0):
+                    pertotal += 1
+                if pertotal == 0:
+                    pertotal = 1            
+            return render(request,'dash.html',{'alumnos':alumnos,'clase':clase,'consolidacion':consolidacion,'devolucion':devolucion, 'perconsolidacion':float(float(perconsolidacion) /float(pertotal))*100, 'perdevolucion':float(float(perdevolucion) /float(pertotal))*100})
     else:
         form = Filterform()
     return render(request,'filter.html',{'form':form})
