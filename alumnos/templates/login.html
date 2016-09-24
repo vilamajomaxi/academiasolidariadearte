@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="row center  ">
+            <form class="form-horizontal col-sm-offset-4">
+                {% for field in form %}
+                    <div class="form-group">{% csrf_token %}
+                        <label class="control-label col-sm-2" for="for">{{ field.label_tag }}</label>
+                        <div class="col-sm-4 ">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="form-group  col-sm-offset-4 col-sm-6">
+                    <button action='/login' formmethod="post" type="submit" class="btn btn-primary btn-block">
+                        Ingresar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
+

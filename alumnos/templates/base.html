@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Divisiones Afa</title>
+    {#        <script type="text/javascript" src="/static/django_tinymce/init_tinymce.js"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
+    <script type="text/javascript" src="/static/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" src="/static/django_tinymce/init_tinymce.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="brand" href="/"><strong>Asociación solidaria</strong></a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                    <li><a href="/publicacion/mispublicaciones"><strong>Agregar Alumno</strong></a></li>
+                {% endif %}
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">-->
+
+                <!--<li>-->
+                    <!--<form class="navbar-form navbar-right" action="/busqueda/" method="POST">{% csrf_token %}-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" id="busqueda" name="busqueda" class="form-control"-->
+                                   <!--placeholder="Ingrese su busqueda">-->
+                        <!--</div>-->
+                        <!--<button type="submit" formmethod="POST" class="btn btn-default">Buscar</button>-->
+                    <!--</form>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </div>
+    </nav>
+    <div class="contenido">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+
+    <div class="container-fluid col-sm-12 footer" style="padding-top:30px">
+        <nav id="footer" class="navbar navbar-default ">
+            <div class="container-fluid">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Hackatong 2016</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a> <span class="glyphicon glyphicon-user"> {{ user.username }}</span></a></li>
+                        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                    {% else %}
+                        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+</
+>
+
+</body>
+</html>
