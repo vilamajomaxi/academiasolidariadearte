@@ -45,3 +45,6 @@ class Asistencia(models.Model):
     fecha_hora = models.DateTimeField(auto_now=True)
     alumno = models.ForeignKey(Alumno)
     clase = models.ForeignKey(Clase)
+
+    def __str__(self):
+        return str(self.fecha_hora) + "-"+str(self.alumno)

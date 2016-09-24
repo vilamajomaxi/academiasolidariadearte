@@ -26,7 +26,5 @@ def login(request):
         form=LoginForm()
     return render(request,'login.html',{'form':form})
 
-
-
 def dash(request):
     pass
